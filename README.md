@@ -20,3 +20,7 @@ We can also install the Stage View plugin to see the progress of each step stage
 
 
 We create a Jenkinsfile that includes build jar, build image, and deploy stages. We also add a script.groovy file and include the functions for these stages inside.
+
+To access GitHub through Jenkins, add GitHub Integration and Authentication plugins.
+
+Create a simple pipeline that uses this GitHub repository as the source code and set the used branch to main.
