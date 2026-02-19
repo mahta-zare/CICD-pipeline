@@ -11,6 +11,23 @@ Open port 8080 and 50000 to access jenkins container, and allow communication be
 
 Jenkins container should be up and running as a docker container and should be accessible on the browser by entering the IP_address:8080.
 
+To make docker available inside Jenkins container, we make the docker runtime directory available from our server to the container as a volume.
+
+```
+docker run -p 8080:8080 -p 50000:50000 -d \
+-v jenkins_home:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v /usr/bin/docker:/usr/bin/docker \
+jenkins/jenkins:2.551
+```
+
+We need to change the permissions of the docker.sock file inside the docker container so that the non-root user can use docker pull or other docker commands. To do this, enter the container as the root user and set the permissions to 666:
+
+```
+docker exec -it -u 0 <containerID> bash
+chmod 666 /var/run/docker.sock
+```
+
 
 After accessing Jenkins UI, in settings -> Tools, we add a Maven installation to make Maven commands available in the Jenkinsfile.
 
