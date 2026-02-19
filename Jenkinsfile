@@ -6,7 +6,7 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stge("init") {
+        stage("init") {
             steps {
                 script {
                     gv = load "script.groovy"
